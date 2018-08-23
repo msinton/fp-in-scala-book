@@ -22,6 +22,8 @@ object Machine {
     })
   }
 
+  // remember State means
+  // machine => ((Int,Int), newMachine)
   def simulate2(inputs: List[Input]): State[Machine, (Int, Int)] = for {
     _ <- sequence(inputs map (modify[Machine] _ compose update))
     // _ <- sequence(inputs map (i => modify[Machine](update(i))))   // this is equivalent ^
