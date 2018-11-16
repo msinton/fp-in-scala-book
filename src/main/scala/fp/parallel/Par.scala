@@ -1,4 +1,4 @@
-package parallel
+package fp.parallel
 
 import java.util.concurrent.{Callable, ExecutorService, Future}
 

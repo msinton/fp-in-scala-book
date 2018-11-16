@@ -1,6 +1,7 @@
-package candy
+package fp.candy
 
-import State._
+import fp.state._
+import fp.state.State._
 
 case class Machine(locked: Boolean, candies: Int, coins: Int)
 
@@ -22,7 +23,7 @@ object Machine {
     })
   }
 
-  // remember State means
+  // remember State[Machine, (Int,Int)] means it has run:
   // machine => ((Int,Int), newMachine)
   def simulate2(inputs: List[Input]): State[Machine, (Int, Int)] = for {
     _ <- sequence(inputs map (modify[Machine] _ compose update))

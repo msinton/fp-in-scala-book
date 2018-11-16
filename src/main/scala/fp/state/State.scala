@@ -1,6 +1,6 @@
-package candy
+package fp.state
 
-import State._
+import fp.state.State._
 
 case class State[S, +A](run: S => (A, S)) {
 

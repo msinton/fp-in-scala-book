@@ -1,4 +1,4 @@
-package candy
+package fp.candy
 
 import org.scalatest.WordSpec
 

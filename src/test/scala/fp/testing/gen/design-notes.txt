@@ -1,0 +1,13 @@
+8.1 Properties for sum: List[Int] => Int
+
+reversing list and summing == sum list
+sum list length n values x == n * x
+sum empty list == 0
+sum list of x to n increasing by 1 == (n - x + 1) * (n + x) / 2
+sum list of only positive values > 0
+sum list of only negative values < 0
+
+8.2 max
+
+take a list and insert a larger value than all elements in list then max returns it
+insert less than or equal to values and max remains the same
