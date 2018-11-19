@@ -4,9 +4,9 @@ import fp.state.State
 import fp.testing.Prop
 import rng.RNG
 
-case class Gen[A](sample: State[RNG, A]) {
+import scala.annotation.tailrec
 
-}
+case class Gen[A](sample: State[RNG, A])
 
 object Gen {
 
@@ -39,6 +39,7 @@ object Gen {
     sequence(List.fill(n)(a))
 
   def lazySequence[S, A](sas: Stream[State[S, A]]): State[S, Stream[A]] = {
+    @tailrec
     def loop(s: S, actions: Stream[State[S, A]], acc: Stream[A]): (Stream[A], S) =
       actions match {
         case Stream() => (acc.reverse, s)
@@ -46,7 +47,6 @@ object Gen {
           case (a, s1) => loop(s1, fs, a #:: acc)
         }
       }
-
     State(s => loop(s, sas, Stream()))
   }
 
