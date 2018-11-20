@@ -46,8 +46,8 @@ object Prop {
     override def isFalsified: Boolean = true
   }
 
-  def randomStream[A](g: Gen[A])(rng: RNG): Stream[A] = ???
-//    fp.laziness.Stream.unfold()
+  def randomStream[A](g: Gen[A])(rng: RNG): fp.laziness.Stream[A] =
+    fp.laziness.Stream.unfold(rng)(rng => Option(g.sample.run(rng)))
 
   def buildMsg[A](a: A, e: Throwable): String =
     s"""Test case $a
@@ -58,7 +58,7 @@ object Prop {
   def forAll[A](as: Gen[A])(f: A => Boolean): Prop = Prop(
     (n, rng) =>
       randomStream(as)(rng)
-        .zip(Stream.from(0))
+        .zip(fp.laziness.Stream.from(0))
         .take(n)
         .map {
           case (a, index) =>
